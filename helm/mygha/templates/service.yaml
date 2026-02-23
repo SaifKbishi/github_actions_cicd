@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-flask
+  name: {{ .Release.Name }}-mygha-svc
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: {{ .Release.Name }}-flask
+    app: {{ .Release.Name }}-mygha
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}

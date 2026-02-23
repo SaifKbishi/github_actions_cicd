@@ -1,20 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-flask
+  name: {{ .Release.Name }}-mygha
+  labels:
+    app: {{ .Release.Name }}-mygha
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-flask
+      app: {{ .Release.Name }}-mygha
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-flask
+        app: {{ .Release.Name }}-mygha
     spec:
       containers:
-        - name: flask
+        - name: mygha
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.service.targetPort }}
+            - containerPort: {{ .Values.containerPort }}
