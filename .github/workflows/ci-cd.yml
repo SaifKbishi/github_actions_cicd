@@ -1,0 +1,53 @@
+name: CI - Helm (PR validation)
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'charts/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.14.2
+
+      - name: Lint charts
+        run: |
+          set -e
+          for chart in charts/*; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              echo "::group::Lint $chart"
+              helm lint "$chart" --strict
+              echo "::endgroup::"
+            fi
+          done
+
+      - name: Package charts (sanity)
+        run: |
+          mkdir -p dist
+          for chart in charts/*; do
+            if [ -f "$chart/Chart.yaml" ]; then
+              echo "::group::Package $chart"
+              helm dependency update "$chart" || true
+              helm package "$chart" -d dist
+              echo "::endgroup::"
+            fi
+          done
+
+      # Optional: upload packaged artifacts for PR inspection
+      - name: Upload packaged charts
+        uses: actions/upload-artifact@v4
+        with:
+          name: helm-packages
+          path: dist/*.tgz
