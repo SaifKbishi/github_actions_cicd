@@ -1,2 +1,15 @@
-This is the first test to main branch to check if the flow works
-testing 01 2026/02/24
+…or create a new repository on the command line
+echo "# github_actions_cicd" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/SaifKbishi/github_actions_cicd.git
+git push -u origin main
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/SaifKbishi/github_actions_cicd.git
+git branch -M main
+git push -u origin main
+
+20260224 @ 09:50
