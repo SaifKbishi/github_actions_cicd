@@ -3,12 +3,12 @@ entries:
   mygha:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-02-24T07:53:48.714817742Z"
+    created: "2026-02-24T10:55:42.285655664Z"
     description: A Helm chart for Kubernetes
-    digest: cfa60ac6aab288d6497d832d7b586ff964024ecc71ce657404aa8333dc7e9dc4
+    digest: 5bf5aa41142d809a809c3e7febddf7d5daeb20335149acab46b32f7003efaf7e
     name: mygha
     type: application
     urls:
     - https://saifkbishi.github.io/github_actions_cicd/charts/mygha-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-24T07:53:48.714251971Z"
+generated: "2026-02-24T10:55:42.28495191Z"
